@@ -55,7 +55,7 @@ void loop() {
   
   // solid color
   else if (counter == 0) {
-    setColor(255,192,203); // pink
+    setColor(255,20,147); // purple
     delay(300);
   }
   
