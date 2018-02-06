@@ -1,0 +1,77 @@
+int buttonPin = 3;
+int redPin = 11;
+int greenPin = 10;
+int bluePin = 9;
+int counter = 0;
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+}
+
+void colorRoutine(int color1, int color2, int color3) {
+  if (buttonState != LOW) {
+    setColor(color1, color2, color3);
+  }
+  
+  else {
+    counter = 0;
+    delay(300);
+  }
+}
+
+void setColor(int red, int green, int blue)
+{
+  #ifdef COMMON_ANODE
+    red = 255 - red;
+    green = 255 - green;
+    blue = 255 - blue;
+  #endif
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);  
+}
+
+void loop() {
+  int buttonState;
+  buttonState = digitalRead(buttonPin);
+  
+  if (buttonState == LOW) {
+    counter++;
+    delay(300);
+  }
+  
+  else if (counter == 0) {
+    setColor(255,0,0);
+  }
+  
+  else if (counter == 1) {
+    setColor(0,255,0);
+  }
+  
+  else if (counter == 2) {
+    setColor(0,0,255);
+  }
+  
+  else if (counter == 3) {
+    setColor(255,255,0);
+  }
+
+  else if (counter == 4) {
+    colorRoutine(255,0,0); // red
+    delay(1000);
+    colorRoutine(0,255,0); // green
+    delay(1000); 
+    colorRoutine(0,0,255); // blue
+    delay(1000); 
+    colorRoutine(255,255,0); // yellow
+    delay(1000); 
+    colorRoutine(80,0,80); // purple
+    delay(1000); 
+    colorRoutine(0,255,255); // aqua
+    delay(1000); 
+  }
+}
+
