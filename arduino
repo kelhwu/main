@@ -14,6 +14,9 @@ void setup() {
 // creates a color loop that first checks for the button
 // being pressed down before going to the next color
 void colorRoutine(int color1, int color2, int color3) {
+  int buttonState;
+  buttonState = digitalRead(buttonPin);
+  
   if (buttonState != LOW) {
     setColor(color1, color2, color3);
   }
